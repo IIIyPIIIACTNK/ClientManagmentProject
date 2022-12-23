@@ -9,7 +9,8 @@
         Title="MainWindow" Height="200" Width="200">
     <Grid Background="Lavender">
         <TextBlock HorizontalAlignment="Center" Margin="0,40,0,0" TextWrapping="Wrap" Text="Тип клиента" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
-        <ComboBox Name="ClientType" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top" Width="120" Background="#FFCDCDF7">
+        <ComboBox Name="ClientType" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Top" Width="120" 
+                  Background="#FFCDCDF7">
             <System:String>Менеджер</System:String>
             <System:String>Консультант</System:String>
         </ComboBox>

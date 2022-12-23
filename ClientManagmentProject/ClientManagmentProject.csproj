@@ -55,25 +55,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddClientWindow.xaml.cs">
+    <Compile Include="Windows\AddClientWindow.xaml.cs">
       <DependentUpon>AddClientWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ConsultantWindow.xaml.cs">
+    <Compile Include="Windows\ConsultantWindow.xaml.cs">
       <DependentUpon>ConsultantWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManagerWindow.xaml.cs">
+    <Compile Include="Windows\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XMLManager.cs" />
-    <Page Include="AddClientWindow.xaml">
+    <Compile Include="Objects\Repository.cs" />
+    <Compile Include="StaticClasses\XMLManager.cs" />
+    <Page Include="Windows\AddClientWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ConsultantWindow.xaml">
+    <Page Include="Windows\ConsultantWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -81,20 +82,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ClientObject.cs" />
-    <Compile Include="Consultant.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Objects\ClientObject.cs" />
+    <Compile Include="ControlClasses\Consultant.cs" />
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ManagerWindow.xaml">
+    <Page Include="Windows\ManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Manager.cs" />
-    <Compile Include="ManagmentBaseClass.cs" />
+    <Compile Include="ControlClasses\Manager.cs" />
+    <Compile Include="ControlClasses\ManagmentBaseClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
