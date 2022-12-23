@@ -17,7 +17,7 @@ namespace ClientManagmentProject
 
         static private ObservableCollection<ClientObject> obsClients;
 
-
+        
 
 
         #region Поля
