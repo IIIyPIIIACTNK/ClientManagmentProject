@@ -19,7 +19,6 @@ namespace ClientManagmentProject
     /// </summary>
     public partial class AddClientWindow : Window
     {
-        List<ClientObject> clients;
         public AddClientWindow()
         {
             InitializeComponent();
@@ -32,7 +31,7 @@ namespace ClientManagmentProject
                 MessageBox.Show("Поля необходимо запомнить", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            clients.Add(new ClientObject(clientName.Text, clientPhoneNumber.Text, clientIdNumber.Text));
+            Repository.Clients.Add(new ClientObject(clientName.Text, clientPhoneNumber.Text, clientIdNumber.Text));
             
             Close();
         }
@@ -42,10 +41,5 @@ namespace ClientManagmentProject
             Close();
         }
 
-        public AddClientWindow(ref List<ClientObject> clients)
-        {
-            InitializeComponent();
-            this.clients = clients;
-        }
     }
 }

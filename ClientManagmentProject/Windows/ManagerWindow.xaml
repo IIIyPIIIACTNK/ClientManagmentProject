@@ -26,18 +26,31 @@
         </ListBox>
         <Button Content="Выход" Click="ExitButtonClick" Margin="0,367,0,0" Background="White" VerticalAlignment="Top"
                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" HorizontalAlignment="Center"/>
+        
         <Button  Content="Изменить"  HorizontalAlignment="Center" Margin="0,27,0,0"  Background="White" VerticalAlignment="Top"  
                  Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="ChangeButtonClick"/>
+        
         <Button Content="Сохранить" HorizontalAlignment="Center" Margin="0,57,0,0"  Background="White" VerticalAlignment="Top"  
                  Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="SaveClientButtonClick"/>
+        
+        
         <Button Content="Добавить" HorizontalAlignment="Center" Margin="0,87,0,0"  Background="White" VerticalAlignment="Top"  
                  Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="AddClientButtonClick"/>    
+        
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="36,10,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top"/>
         <TextBox Name="clientPhoneNumber" Grid.Column="2" HorizontalAlignment="Left" Margin="36,31,0,0" 
                  Height="20" Width="100" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        
         <TextBlock Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Text="Номер паспорта"
                    TextAlignment="Center" Margin="0,10,0,0"/>
         <TextBox Name="clientIdNumber" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Margin="0,31,0,0"/>
+        
+        <TextBlock Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Text="Имя" HorizontalAlignment="Right"
+                   TextAlignment="Center" Margin="0,10,36,0" />
+        <TextBox Name="clientName" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Margin="0,31,36,0"
+                 HorizontalAlignment="Right"/>
+
+        
         <ListView x:Name="clientsChangesList" Grid.Column="1" Margin="121,66,0,0" Grid.ColumnSpan="2" Background="#FFCDCDF7" >
             <ListView.View>
                 <GridView>

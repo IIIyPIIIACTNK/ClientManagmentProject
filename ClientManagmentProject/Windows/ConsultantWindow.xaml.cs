@@ -22,23 +22,16 @@ namespace ClientManagmentProject
     {
         Consultant consultant;
 
-        readonly string path = @"C:\Users\gerem\VSProjects\ClientManagmentProject\ClientManagmentProject\Data\Clients.xml";
-
-        List<ClientObject> clients = new List<ClientObject>();
-        ObservableCollection<ClientObject> obsClients { get; set; }
-        ObservableCollection<Changes> clientsChanges { get; set; }
         public ConsultantWindow()
         {
             InitializeComponent();
-            XMLManager.Deserialize(path, clients);
             consultant = new Consultant();
-            obsClients = new ObservableCollection<ClientObject>(clients);
-            clientsList.ItemsSource = obsClients;
+            clientsList.ItemsSource = Repository.ObsClients;
         }
 
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            XMLManager.SerializeToXML(path, clients);
+            Repository.SaveRepository();
             var mainWindow = new MainWindow();
             Close();
             mainWindow.Show();
@@ -46,10 +39,9 @@ namespace ClientManagmentProject
 
         private void clientsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            clientPhoneNumber.Text = clients[clientsList.SelectedIndex].PhoneNumber;
+            clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
 
-            clientsChanges = new ObservableCollection<Changes>(clients[clientsList.SelectedIndex].changes);
-            clientsChangesList.ItemsSource = clientsChanges;
+            clientsChangesList.ItemsSource = Repository.GetClientChangesList(clientsList.SelectedIndex);
         }
 
 
@@ -62,11 +54,11 @@ namespace ClientManagmentProject
             }
             if(clientPhoneNumber.Text == String.Empty)
             {
-                clientPhoneNumber.Text = clients[clientsList.SelectedIndex].PhoneNumber;
+                clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
                 MessageBox.Show("Поле необходимо заполнить", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            consultant.SetPhoneNumber(clients[clientsList.SelectedIndex], clientPhoneNumber.Text);
+            consultant.SetPhoneNumber(Repository.Clients[clientsList.SelectedIndex], clientPhoneNumber.Text);
         }
     }
 

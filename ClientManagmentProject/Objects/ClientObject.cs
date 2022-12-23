@@ -26,7 +26,7 @@ public enum DataType
 
 namespace ClientManagmentProject
 {
-    public class ClientObject : INotifyPropertyChanged
+    public class ClientObject : INotifyPropertyChanged, IComparable<ClientObject>
     {
         private string name;
         private string phoneNumber;
@@ -43,6 +43,7 @@ namespace ClientManagmentProject
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
 
         /// <summary>
         /// Клиент банка. Для создания из архива
@@ -71,6 +72,10 @@ namespace ClientManagmentProject
             this.idNumber = idNumber;
             changes.Add(new Changes(DateTime.Now, DataType.all, ChangeType.createClient, UserType.selfChanged));
             
+        }
+        public int CompareTo(ClientObject other)
+        {
+            return Name.CompareTo(other.Name);
         }
     }
 

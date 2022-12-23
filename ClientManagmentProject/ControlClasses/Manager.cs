@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ClientManagmentProject
 {
-    public class Manager : Consultant
+    public class Manager : ManagmentBaseClass
     {
         public Manager() 
         {
@@ -23,9 +24,8 @@ namespace ClientManagmentProject
             ChangedData(client, DataType.idNumber, ChangeType.setClientData);
         }
 
-        public override void SetPhoneNumber(ClientObject client, string number)
+        public void SetPhoneNumber(ClientObject client, string number)
         {
-            if (client.PhoneNumber == number) return;
             client.PhoneNumber = number;
             ChangedData(client, DataType.phoneNumber, ChangeType.setClientData);
         }
@@ -33,6 +33,25 @@ namespace ClientManagmentProject
         private new void ChangedData(ClientObject client, DataType dataType, ChangeType changeType)
         {
             client.changes.Add(new Changes(DateTime.Now, dataType, changeType, UserType.manager));
+        }
+
+
+        /// <summary>
+        /// Проверка на пристутствие необхоимых данных для изменния
+        /// </summary>
+        private void CheckForFilledFields(ClientObject client, string input)
+        {
+            if (client == null)
+            {
+                MessageBox.Show("Необходимо выбрать клиента для изменения", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (input == String.Empty)
+            {
+                MessageBox.Show("Полe необходимо заполнить", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            
         }
     }
 }

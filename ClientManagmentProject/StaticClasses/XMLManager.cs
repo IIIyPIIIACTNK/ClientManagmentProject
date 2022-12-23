@@ -58,5 +58,41 @@ namespace ClientManagmentProject
             }
             return res;
         }
+
+        static public List<ClientObject> Deserialize(string path)
+        {
+            var document = XDocument.Load(path);
+
+            var res = new List<ClientObject>();
+
+            var residents = document.Element("clients");
+
+
+
+            if (residents != null)
+            {
+                foreach (var r in residents.Elements("client"))
+                {
+                    res.Add(new ClientObject(
+                        r.Element("name").Value,
+                        r.Element("phoneNumber").Value,
+                        r.Element("idNumber").Value,
+                        Convert.ToBoolean(r.Attribute("IsSerialised").Value)));
+
+                    foreach (var c in r.Elements("changes"))
+                    {
+                        res.Last().changes.Add(new Changes(
+                            Convert.ToDateTime(c.Element("recentChangeDate").Value),
+                            (DataType)Enum.Parse(typeof(DataType), c.Element("changeDataType").Value),
+                            (ChangeType)Enum.Parse(typeof(ChangeType), c.Element("changeType").Value),
+                            (UserType)Enum.Parse(typeof(UserType), c.Element("changeUserType").Value)
+                            ));
+                    }
+
+
+                }
+            }
+            return res;
+        }
     }
 }
