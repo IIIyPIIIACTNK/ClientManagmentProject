@@ -18,10 +18,18 @@ namespace ClientManagmentProject
 
         private void clientsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
-            clientIdNumber.Text = Repository.Clients[clientsList.SelectedIndex].IdNumber;
+            try
+            {
+                clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
+                clientIdNumber.Text = Repository.Clients[clientsList.SelectedIndex].IdNumber;
 
-            clientsChangesList.ItemsSource = Repository.GetClientChangesList(clientsList.SelectedIndex);
+                clientsChangesList.ItemsSource = Repository.GetClientChangesList(clientsList.SelectedIndex);
+
+            }
+            catch
+            {
+
+            }
         }
 
         private void ChangeButtonClick(object sender, RoutedEventArgs e)
@@ -65,6 +73,10 @@ namespace ClientManagmentProject
             MessageBox.Show("Сохранено");
         }
 
-
+        private void DeleteClientButtonClick(object sender, RoutedEventArgs e)
+        {
+            Repository.Clients.Remove((ClientObject)clientsList.SelectedItem);
+            Repository.ObsClients.Remove((ClientObject)clientsList.SelectedItem);
+        }
     }
 }
