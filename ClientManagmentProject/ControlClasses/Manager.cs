@@ -32,7 +32,7 @@ namespace ClientManagmentProject
 
         private new void ChangedData(ClientObject client, DataType dataType, ChangeType changeType)
         {
-            client.changes.Add(new Changes(DateTime.Now, dataType, changeType, UserType.manager));
+            client.changes.Add(new ClientObject.Changes(DateTime.Now, dataType, changeType, UserType.manager));
         }
 
 

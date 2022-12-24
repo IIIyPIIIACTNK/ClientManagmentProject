@@ -45,7 +45,7 @@ namespace ClientManagmentProject
                    
                     foreach (var c in r.Elements("changes"))
                     {
-                        res.Last().changes.Add(new Changes(
+                        res.Last().changes.Add(new ClientObject.Changes(
                             Convert.ToDateTime(c.Element("recentChangeDate").Value),
                             (DataType)Enum.Parse(typeof(DataType), c.Element("changeDataType").Value),
                             (ChangeType)Enum.Parse(typeof(ChangeType), c.Element("changeType").Value),
@@ -81,7 +81,7 @@ namespace ClientManagmentProject
 
                     foreach (var c in r.Elements("changes"))
                     {
-                        res.Last().changes.Add(new Changes(
+                        res.Last().changes.Add(new ClientObject.Changes(
                             Convert.ToDateTime(c.Element("recentChangeDate").Value),
                             (DataType)Enum.Parse(typeof(DataType), c.Element("changeDataType").Value),
                             (ChangeType)Enum.Parse(typeof(ChangeType), c.Element("changeType").Value),
