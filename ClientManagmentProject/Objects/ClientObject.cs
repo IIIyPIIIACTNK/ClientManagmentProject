@@ -57,10 +57,10 @@ namespace ClientManagmentProject
             this.name = name;
             this.phoneNumber = phoneNumber;
             this.idNumber = idNumber;
-            
+
         }
         /// <summary>
-        /// Клмент банка. Для создания в приложении
+        /// Клиент банка. Для создания в приложении
         /// </summary>
         /// <param name="name"></param>
         /// <param name="phoneNumber"></param>
@@ -71,29 +71,44 @@ namespace ClientManagmentProject
             this.phoneNumber = phoneNumber;
             this.idNumber = idNumber;
             changes.Add(new Changes(DateTime.Now, DataType.all, ChangeType.createClient, UserType.selfChanged));
-            
+
         }
         public int CompareTo(ClientObject other)
         {
             return Name.CompareTo(other.Name);
         }
-    }
 
-    public class Changes
-    {
-        public DateTime recentChangeDate { get; set; }
-        public DataType changeDataType { get; set; }
-        public ChangeType changeType { get; set; }
-        public UserType changeUserType { get; set; }
-
-        public Changes(DateTime dateTime, DataType dataType, ChangeType changeType, UserType userType)
+        public class Changes
         {
-            this.changeDataType = dataType;
-            this.changeType = changeType;
-            this.changeUserType = userType;
-            this.recentChangeDate = dateTime;
+            public DateTime recentChangeDate { get; set; }
+            public DataType changeDataType { get; set; }
+            public ChangeType changeType { get; set; }
+            public UserType changeUserType { get; set; }
+
+            public Changes(DateTime dateTime, DataType dataType, ChangeType changeType, UserType userType)
+            {
+                this.changeDataType = dataType;
+                this.changeType = changeType;
+                this.changeUserType = userType;
+                this.recentChangeDate = dateTime;
+            }
         }
+
     }
 
+    //public class Changes
+    //{
+    //    public DateTime recentChangeDate { get; set; }
+    //    public DataType changeDataType { get; set; }
+    //    public ChangeType changeType { get; set; }
+    //    public UserType changeUserType { get; set; }
 
+    //    public Changes(DateTime dateTime, DataType dataType, ChangeType changeType, UserType userType)
+    //    {
+    //        this.changeDataType = dataType;
+    //        this.changeType = changeType;
+    //        this.changeUserType = userType;
+    //        this.recentChangeDate = dateTime;
+    //    }
+    //}
 }

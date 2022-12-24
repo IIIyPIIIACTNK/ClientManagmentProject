@@ -33,7 +33,7 @@ namespace ClientManagmentProject
         /// </summary>
         /// <param name="index">Индекс</param>
         /// <returns></returns>
-        static public List<Changes> GetClientChangesList(int index)
+        static public List<ClientObject.Changes> GetClientChangesList(int index)
         {
             return clients[index].changes;
         }

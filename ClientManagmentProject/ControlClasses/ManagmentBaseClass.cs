@@ -12,7 +12,7 @@ namespace ClientManagmentProject
 
         protected void ChangedData(ClientObject client, DataType dataType, ChangeType changeType)
         {
-            client.changes.Add(new Changes(DateTime.Now, dataType, changeType, UserType.consultant));
+            client.changes.Add(new ClientObject.Changes(DateTime.Now, dataType, changeType, UserType.consultant));
         }
         public ManagmentBaseClass()
         {

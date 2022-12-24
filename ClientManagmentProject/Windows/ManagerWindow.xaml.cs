@@ -4,7 +4,6 @@ using System.Windows.Controls;
 
 namespace ClientManagmentProject
 {
-
     public partial class ManagerWindow : Window
     {
         Manager manager;
@@ -22,14 +21,9 @@ namespace ClientManagmentProject
             {
                 clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
                 clientIdNumber.Text = Repository.Clients[clientsList.SelectedIndex].IdNumber;
-
                 clientsChangesList.ItemsSource = Repository.GetClientChangesList(clientsList.SelectedIndex);
-
             }
-            catch
-            {
-
-            }
+            catch { }
         }
 
         private void ChangeButtonClick(object sender, RoutedEventArgs e)
