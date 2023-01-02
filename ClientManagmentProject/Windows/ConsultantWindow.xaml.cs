@@ -26,12 +26,12 @@ namespace ClientManagmentProject
         {
             InitializeComponent();
             consultant = new Consultant();
-            clientsList.ItemsSource = Repository.ObsClients;
+            //clientsList.ItemsSource = Repository.ObsClients;
         }
 
         private void ExitButtonClick(object sender, RoutedEventArgs e)
         {
-            Repository.SaveRepository();
+            //Repository.SaveRepository();
             var mainWindow = new MainWindow();
             Close();
             mainWindow.Show();
@@ -39,26 +39,26 @@ namespace ClientManagmentProject
 
         private void clientsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
+            //clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
 
-            clientsChangesList.ItemsSource = Repository.GetClientChangesList(clientsList.SelectedIndex);
+            //clientsChangesList.ItemsSource = Repository.GetClientChangesList(clientsList.SelectedIndex);
         }
 
 
         private void ChangeButtonClick(object sender, RoutedEventArgs e)
         {
-            if(clientsList.SelectedItem == null)
-            {
-                MessageBox.Show("Необходимо выбрать клиента для изменения", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if(clientPhoneNumber.Text == String.Empty)
-            {
-                clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
-                MessageBox.Show("Поле необходимо заполнить", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            consultant.SetPhoneNumber(Repository.Clients[clientsList.SelectedIndex], clientPhoneNumber.Text);
+            //if(clientsList.SelectedItem == null)
+            //{
+            //    MessageBox.Show("Необходимо выбрать клиента для изменения", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
+            //if(clientPhoneNumber.Text == String.Empty)
+            //{
+            //    clientPhoneNumber.Text = Repository.Clients[clientsList.SelectedIndex].PhoneNumber;
+            //    MessageBox.Show("Поле необходимо заполнить", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    return;
+            //}
+            //consultant.SetPhoneNumber(Repository.Clients[clientsList.SelectedIndex], clientPhoneNumber.Text);
         }
     }
 

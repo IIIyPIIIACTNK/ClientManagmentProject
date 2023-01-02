@@ -19,15 +19,20 @@
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Имя" Height="20" Width="95" VerticalAlignment="Top" TextAlignment="Center" Margin="0,10,0,0"/>
-        <TextBox Name="clientName" Grid.Column="0" Grid.Row="0" Height="20" Width="90" VerticalAlignment="Center" />
+        <TextBox Name="clientName" Grid.Column="0" Grid.Row="0" Height="20" Width="90" VerticalAlignment="Center" 
+                 DataContext="{Binding SelectedClient}" Text="{Binding Name}"/>
         <TextBlock Grid.Column="1" Grid.Row="0" Text="Номер телефона" Height="20" Width="95" VerticalAlignment="Top" TextAlignment="Center" Margin="0,10,0,0"/>
-        <TextBox Name="clientPhoneNumber" Grid.Column="1" Grid.Row="0" Height="20" Width="90" VerticalAlignment="Center"/>
+        <TextBox Name="clientPhoneNumber" Grid.Column="1" Grid.Row="0" Height="20" Width="90" VerticalAlignment="Center"
+                 DataContext="{Binding SelectedClient}" Text="{Binding PhoneNumber}"/>
         <TextBlock Grid.Column="2" Grid.Row="0" Text="Номер паспорта" Height="20" Width="95" VerticalAlignment="Top" TextAlignment="Center" Margin="0,10,0,0"/>
-        <TextBox Name="clientIdNumber" Grid.Column="2" Grid.Row="0" Height="20" Width="90" VerticalAlignment="Center" />
+        <TextBox Name="clientIdNumber" Grid.Column="2" Grid.Row="0" Height="20" Width="90" VerticalAlignment="Center" 
+                 DataContext="{Binding SelectedClient}" Text="{Binding IdNumber}"/>
       
 
-        <Button Grid.Column="1" Grid.Row="1" Content="Сохранить" Height="20" Width="90" HorizontalAlignment="Center" Click="SaveButtonClick"/>
-        <Button Grid.Column="2" Grid.Row="1" Content="Выход" Height="20" Width="90" HorizontalAlignment="Center" Click="ExitButtonClick"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Сохранить" Height="20" Width="90" HorizontalAlignment="Center"
+                Click="SaveButtonClick"/>
+        <Button Grid.Column="2" Grid.Row="1" Content="Выход" Height="20" Width="90" HorizontalAlignment="Center" 
+                Click="ExitButtonClick" Command="{Binding RemoveClient}" CommandParameter="{Binding SelectedClient}"/>
 
     </Grid>
     

@@ -1,30 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace ClientManagmentProject
 {
-    static class Repository
+    public class Repository : INotifyPropertyChanged
     {
-        readonly static string path = @"Clients.xml";
+        readonly string path = @"Clients.xml";
 
 
-        static private List<ClientObject> clients = XMLManager.Deserialize(path);
+        private List<ClientObject> clients = new List<ClientObject>();
 
-        static private ObservableCollection<ClientObject> obsClients;
+        private ObservableCollection<ClientObject> obsClients;
+        private ClientObject selectedClient;
 
-        
-
+        //Команды
+        private RelayCommand addCommand;
+        private RelayCommand removeCommand;
+        private RelayCommand saveCommand;
 
         #region Поля
-
-        static public ObservableCollection<ClientObject> ObsClients { get => obsClients; set { obsClients = value; } }
-
-        static public List<ClientObject> Clients { get => clients; set { clients = value; } }
+        public ObservableCollection<ClientObject> ObsClients { get => obsClients; set { obsClients = value; } }
+        public List<ClientObject> Clients { get => clients; set { clients = value; } }
+        public ClientObject SelectedClient
+        {
+            get => selectedClient;
+            set { selectedClient = value; OnPropertyChanged("SelectedClient"); }
+        }
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ??
+                    (addCommand = new RelayCommand(x =>
+                    {
+                        ClientObject client = new ClientObject();
+                        obsClients.Add(client);
+                        SelectedClient = client;
+                    }));
+            }
+        }
+        public RelayCommand RemoveCommand
+        {
+            get => removeCommand ?? (removeCommand = new RelayCommand(x =>
+                    {
+                        ClientObject client = x as ClientObject;
+                        if (client != null)
+                        {
+                            obsClients.Remove(client);
+                        }
+                    }, (x => obsClients.Count >= 0)));
+        }
 
         #endregion
 
@@ -33,23 +61,35 @@ namespace ClientManagmentProject
         /// </summary>
         /// <param name="index">Индекс</param>
         /// <returns></returns>
-        static public List<ClientObject.Changes> GetClientChangesList(int index)
+        public List<ClientObject.Changes> GetClientChangesList(int index)
         {
-            return clients[index].changes;
+            return clients[index].ThisClientChanges;
         }
 
-        static public void SaveRepository()
+
+
+        public void SaveRepository()
         {
             XMLManager.SerializeToXML(path, clients);
         }
         /// <summary>
         /// Репозиторий клиентов. При создании сортируется по имени
         /// </summary>
-        static Repository() {
+        public Repository()
+        {
+            clients = XMLManager.Deserialize(path, clients);
             clients.Sort();
             obsClients = new ObservableCollection<ClientObject>(clients);
         }
 
-        
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
     }
 }

@@ -9,30 +9,47 @@ namespace ClientManagmentProject
 {
     public class Manager : ManagmentBaseClass
     {
-        public Manager() 
-        {
-        }
-        public void SetClientName(ClientObject client, string name)
-        {
-            client.Name = name;
-            ChangedData(client, DataType.name, ChangeType.setClientData);
-        }
+        readonly string path = @"Clients.xml";
+        Repository repository;
 
-        public void SetIdNumber(ClientObject client, string idNumber)
-        {
-            client.IdNumber = idNumber;
-            ChangedData(client, DataType.idNumber, ChangeType.setClientData);
-        }
+        //Команды
+        private RelayCommand addCommand;
+        private RelayCommand removeCommand;
+        private RelayCommand saveCommand;
 
-        public void SetPhoneNumber(ClientObject client, string number)
+        #region Поля
+        public RelayCommand AddCommand
         {
-            client.PhoneNumber = number;
-            ChangedData(client, DataType.phoneNumber, ChangeType.setClientData);
+            get
+            {
+                return addCommand ??
+                    (addCommand = new RelayCommand(x =>
+                    {
+                        ClientObject client = new ClientObject();
+                        repository.ObsClients.Add(client);
+                        repository.SelectedClient = client;
+                    }));
+            }
         }
+        public RelayCommand RemoveCommand
+        {
+            get => removeCommand ?? (removeCommand = new RelayCommand(x =>
+            {
+                ClientObject client = x as ClientObject;
+                if (client != null)
+                {
+                    repository.ObsClients.Remove(client);
+                }
+            }, (x => repository.ObsClients.Count >= 0)));
+        }
+        #endregion
 
+        #region Констуктор
+        #endregion
+       
         private new void ChangedData(ClientObject client, DataType dataType, ChangeType changeType)
         {
-            client.changes.Add(new ClientObject.Changes(DateTime.Now, dataType, changeType, UserType.manager));
+            client.ThisClientChanges.Add(new ClientObject.Changes(DateTime.Now, dataType, changeType, UserType.manager));
         }
 
 
