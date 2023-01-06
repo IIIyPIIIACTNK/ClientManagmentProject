@@ -16,11 +16,11 @@
 
         <ListBox Name="clientsList" Grid.Column="0" 
                  Background="#FFCDCDF7"
-                 ItemsSource="{Binding ObsClients}" SelectedItem="{Binding SelectedClient}">
+                 ItemsSource="{Binding ObsClients, Mode=OneWay}" SelectedItem="{Binding SelectedClient}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="16" Text="{Binding Path= Name}"  HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="16" Text="{Binding Path= Name, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -28,13 +28,10 @@
         <Button Content="Выход" Click="ExitButtonClick" Margin="0,367,0,0" Background="White" VerticalAlignment="Top"
                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" HorizontalAlignment="Center"/>
         
-        <Button  Content="Изменить"  HorizontalAlignment="Center" Margin="0,27,0,0"  Background="White" VerticalAlignment="Top"  
-                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" />
-        
         <Button Content="Сохранить" HorizontalAlignment="Center" Margin="0,57,0,0"  Background="White" VerticalAlignment="Top"  
-                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="SaveClientButtonClick"/>
-        
-        
+                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="SaveClientButtonClick"
+                Command="{Binding SaveCommand}"/>
+
         <Button Content="Добавить" HorizontalAlignment="Center" Margin="0,87,0,0"  Background="White" VerticalAlignment="Top"  
                  Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="AddClientButtonClick"
                 Command="{Binding AddCommand}"/>    

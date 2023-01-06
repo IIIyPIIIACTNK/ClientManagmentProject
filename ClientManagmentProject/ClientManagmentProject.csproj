@@ -65,7 +65,7 @@
     <Compile Include="Windows\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Repository.cs" />
+    <Compile Include="ControlClasses\Manager.cs" />
     <Compile Include="StaticClasses\XMLManager.cs" />
     <Page Include="Windows\AddClientWindow.xaml">
       <SubType>Designer</SubType>
@@ -95,7 +95,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlClasses\Manager.cs" />
     <Compile Include="ControlClasses\ManagmentBaseClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

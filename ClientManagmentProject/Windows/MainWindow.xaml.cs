@@ -9,12 +9,10 @@ namespace ClientManagmentProject
     /// </summary>
     public partial class MainWindow : Window
     {
-        Repository repository = new Repository();
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = repository;
         }
 
         private void StartButton(object sender, RoutedEventArgs e)
@@ -26,13 +24,13 @@ namespace ClientManagmentProject
                     var managerWindow = new ManagerWindow();
                     Close();
                     managerWindow.Show();
-                    managerWindow.DataContext = repository;
+                    managerWindow.DataContext = new Manager();
                     break;
                 case 1:
                     var consultantWindow = new ConsultantWindow();
                     Close();
                     consultantWindow.Show();
-                    consultantWindow.DataContext = repository;
+                    consultantWindow.DataContext = new Consultant();
                     break;
                 default:
                     MessageBox.Show("Выберите тип клиента", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);

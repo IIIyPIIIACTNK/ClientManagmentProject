@@ -28,8 +28,6 @@
         </ListBox>
         <Button Content="Выход" Click="ExitButtonClick" Margin="0,367,0,0" Background="White" VerticalAlignment="Top"
                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" HorizontalAlignment="Center"/>
-        <Button  Content="Изменить"  HorizontalAlignment="Center" Margin="0,27,0,0"  Background="White" VerticalAlignment="Top"  
-                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="ChangeButtonClick"/>
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="36,10,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top"/>
         <TextBox Name="clientPhoneNumber" Grid.Column="2" HorizontalAlignment="Left" 
                  Margin="36,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93"

@@ -6,10 +6,10 @@ namespace ClientManagmentProject
 {
     public partial class ManagerWindow : Window
     {
-        Manager manager;
         public ManagerWindow()
         {
             InitializeComponent();
+            DataContext = new Manager();
         }
 
 
@@ -30,14 +30,12 @@ namespace ClientManagmentProject
 
         private void SaveClientButtonClick(object sender, RoutedEventArgs e)
         {
-            //Repository.SaveRepository();
             MessageBox.Show("Сохранено");
         }
 
         private void DeleteClientButtonClick(object sender, RoutedEventArgs e)
         {
-            //Repository.Clients.Remove((ClientObject)clientsList.SelectedItem);
-            //Repository.ObsClients.Remove((ClientObject)clientsList.SelectedItem);
+            MessageBox.Show("Удален");
         }
     }
 }

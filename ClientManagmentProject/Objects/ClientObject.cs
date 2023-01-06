@@ -32,11 +32,23 @@ namespace ClientManagmentProject
         private string phoneNumber;
         private string idNumber;
         private List<Changes> thisClientChanges = new List<Changes>();
-        public string Name { get => name; set { name = value; OnPropertyChanged(Name); } }
-        public string PhoneNumber { get => phoneNumber; set { phoneNumber = value; OnPropertyChanged(PhoneNumber); } }
-        public string IdNumber { get => idNumber; set { idNumber = value; OnPropertyChanged(IdNumber); } }
+        public string Name { get => name; 
+            set { name = value; OnPropertyChanged(Name); 
+                ThisClientChanges.Add(new Changes(DateTime.Now, DataType.name, ChangeType.setClientData, userType)); } }
+        public string PhoneNumber { get => phoneNumber; 
+            set { phoneNumber = value; OnPropertyChanged(PhoneNumber); 
+                ThisClientChanges.Add(new Changes(DateTime.Now, DataType.phoneNumber, ChangeType.setClientData, userType)); } }
+        public string IdNumber { get => idNumber; set { idNumber = value; 
+                OnPropertyChanged(IdNumber); 
+                ThisClientChanges.Add(new Changes(DateTime.Now, DataType.idNumber, ChangeType.setClientData, userType)); } }
+        /// <summary>
+        /// Список изменений клиента
+        /// </summary>
         public List<Changes> ThisClientChanges { get => thisClientChanges; set => thisClientChanges = value; }
-
+        /// <summary>
+        /// Тип аккаунта исполнителя
+        /// </summary>
+        public UserType userType;
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -75,8 +87,9 @@ namespace ClientManagmentProject
 
         }
 
-        public ClientObject() { 
-        thisClientChanges.Add(new Changes(DateTime.Now,DataType.all,ChangeType.createClient, UserType.selfChanged));
+        public ClientObject()
+        {
+            thisClientChanges.Add(new Changes(DateTime.Now, DataType.all, ChangeType.createClient, UserType.selfChanged));
         }
         #endregion
         public int CompareTo(ClientObject other)
@@ -99,7 +112,6 @@ namespace ClientManagmentProject
                 this.recentChangeDate = dateTime;
             }
         }
-
     }
-   
+
 }
