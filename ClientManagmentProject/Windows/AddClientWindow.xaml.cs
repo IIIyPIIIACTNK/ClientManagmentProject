@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,8 +32,6 @@ namespace ClientManagmentProject
                 MessageBox.Show("Поля необходимо запомнить", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Repository.Clients.Add(new ClientObject(clientName.Text, clientPhoneNumber.Text, clientIdNumber.Text));
-            
             Close();
         }
 

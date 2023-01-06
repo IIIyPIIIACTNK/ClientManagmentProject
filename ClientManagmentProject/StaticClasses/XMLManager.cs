@@ -16,7 +16,7 @@ namespace ClientManagmentProject
                          new XElement("name", e.Name),
                          new XElement("phoneNumber", e.PhoneNumber),
                          new XElement("idNumber", e.IdNumber),
-                         from c in e.changes
+                         from c in e.ThisClientChanges
                          select new XElement("changes",
                          new XElement("recentChangeDate", c.recentChangeDate),
                          new XElement("changeDataType", c.changeDataType),
@@ -45,7 +45,7 @@ namespace ClientManagmentProject
                    
                     foreach (var c in r.Elements("changes"))
                     {
-                        res.Last().changes.Add(new ClientObject.Changes(
+                        res.Last().ThisClientChanges.Add(new ClientObject.Changes(
                             Convert.ToDateTime(c.Element("recentChangeDate").Value),
                             (DataType)Enum.Parse(typeof(DataType), c.Element("changeDataType").Value),
                             (ChangeType)Enum.Parse(typeof(ChangeType), c.Element("changeType").Value),
@@ -81,7 +81,7 @@ namespace ClientManagmentProject
 
                     foreach (var c in r.Elements("changes"))
                     {
-                        res.Last().changes.Add(new ClientObject.Changes(
+                        res.Last().ThisClientChanges.Add(new ClientObject.Changes(
                             Convert.ToDateTime(c.Element("recentChangeDate").Value),
                             (DataType)Enum.Parse(typeof(DataType), c.Element("changeDataType").Value),
                             (ChangeType)Enum.Parse(typeof(ChangeType), c.Element("changeType").Value),

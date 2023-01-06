@@ -14,47 +14,56 @@
         </Grid.ColumnDefinitions>
 
 
-        <ListBox Name="clientsList" Grid.Column="0" SelectionChanged="clientsList_SelectionChanged" Background="#FFCDCDF7" >
+        <ListBox Name="clientsList" Grid.Column="0" 
+                 Background="#FFCDCDF7"
+                 ItemsSource="{Binding ObsClients, Mode=OneWay}" SelectedItem="{Binding SelectedClient}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="16" Text="{Binding Path = Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"  HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="16" Text="{Binding Path= Name, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
         </ListBox>
         <Button Content="Выход" Click="ExitButtonClick" Margin="0,367,0,0" Background="White" VerticalAlignment="Top"
                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" HorizontalAlignment="Center"/>
         
-        <Button  Content="Изменить"  HorizontalAlignment="Center" Margin="0,27,0,0"  Background="White" VerticalAlignment="Top"  
-                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="ChangeButtonClick"/>
-        
         <Button Content="Сохранить" HorizontalAlignment="Center" Margin="0,57,0,0"  Background="White" VerticalAlignment="Top"  
-                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="SaveClientButtonClick"/>
-        
-        
+                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="SaveClientButtonClick"
+                Command="{Binding SaveCommand}"/>
+
         <Button Content="Добавить" HorizontalAlignment="Center" Margin="0,87,0,0"  Background="White" VerticalAlignment="Top"  
-                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="AddClientButtonClick"/>    
+                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="AddClientButtonClick"
+                Command="{Binding AddCommand}"/>    
         
         <Button Content="Удалить" HorizontalAlignment="Center" Margin="0,117,0,0"  Background="White" VerticalAlignment="Top"  
-                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="DeleteClientButtonClick"/>    
+                 Width="110" Height="25" RenderTransformOrigin="0.316,0.492" Grid.Column="1" Click="DeleteClientButtonClick"
+                Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedClient}"/>    
         
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Margin="36,10,0,0" TextWrapping="Wrap" Text="Номер телефона" VerticalAlignment="Top"/>
-        <TextBox Name="clientPhoneNumber" Grid.Column="2" HorizontalAlignment="Left" Margin="36,31,0,0" 
-                 Height="20" Width="100" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBox Name="clientPhoneNumber" Grid.Column="2" Margin="36,31,0,0" HorizontalAlignment="Left"
+                 Height="20" Width="100" TextWrapping="Wrap" VerticalAlignment="Top"
+                 DataContext="{Binding SelectedClient}"
+                 Text="{Binding PhoneNumber, Mode=TwoWay}"/>
         
         <TextBlock Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Text="Номер паспорта"
                    TextAlignment="Center" Margin="0,10,0,0"/>
-        <TextBox Name="clientIdNumber" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Margin="0,31,0,0"/>
+        <TextBox Name="clientIdNumber" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top"
+                 Margin="0,31,0,0"
+                 DataContext="{Binding ElementName=clientsList,Path=SelectedItem}"
+                 Text="{Binding IdNumber, Mode=TwoWay}"/>
         
         <TextBlock Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Text="Имя" HorizontalAlignment="Right"
                    TextAlignment="Center" Margin="0,10,36,0" />
-        <TextBox Name="clientName" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Margin="0,31,36,0"
-                 HorizontalAlignment="Right"/>
+        <TextBox Name="clientName" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" 
+                 Margin="0,31,36,0"  HorizontalAlignment="Right"
+                 DataContext="{Binding ElementName=clientsList,Path=SelectedItem}"
+                 Text="{Binding Name, Mode=TwoWay}"/>
 
-        
-        <ListView x:Name="clientsChangesList" Grid.Column="1" Margin="121,66,0,0" Grid.ColumnSpan="2" Background="#FFCDCDF7" >
+
+        <ListView x:Name="clientsChangesList" Grid.Column="1" Margin="121,66,0,0" Grid.ColumnSpan="2" 
+                  Background="#FFCDCDF7" DataContext="{Binding ElementName=clientsList, Path=SelectedItem}" 
+                  ItemsSource="{Binding ThisClientChanges}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path= recentChangeDate}" Width="150">Дата</GridViewColumn>
@@ -63,22 +72,7 @@
                     <GridViewColumn DisplayMemberBinding="{Binding Path = changeUserType}" Width="150">Тип пользователя</GridViewColumn>
                 </GridView>
             </ListView.View>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock FontSize="16" Text="{Binding Path = recentChangeDate}" Grid.Column="0"/>
-                            <TextBlock FontSize="16" Text="{Binding Path = changeDataType}" Grid.Column="1"/>
-                        </Grid>
-
-                    </StackPanel>
-
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            
         </ListView>
         
 

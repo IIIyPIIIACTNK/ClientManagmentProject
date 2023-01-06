@@ -1,57 +1,68 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace ClientManagmentProject
 {
-    public class Manager : ManagmentBaseClass
+    public class Manager : ManagmentBaseClass, INotifyPropertyChanged
     {
-        public Manager() 
-        {
-        }
-        public void SetClientName(ClientObject client, string name)
-        {
-            client.Name = name;
-            ChangedData(client, DataType.name, ChangeType.setClientData);
-        }
+        private ClientObject selectedClient;
 
-        public void SetIdNumber(ClientObject client, string idNumber)
-        {
-            client.IdNumber = idNumber;
-            ChangedData(client, DataType.idNumber, ChangeType.setClientData);
-        }
+        //Команды
+        private RelayCommand addCommand;
+        private RelayCommand removeCommand;
 
-        public void SetPhoneNumber(ClientObject client, string number)
+        #region Поля
+        public ClientObject SelectedClient
         {
-            client.PhoneNumber = number;
-            ChangedData(client, DataType.phoneNumber, ChangeType.setClientData);
+            get => selectedClient; 
+            set { selectedClient = value; OnPropertyChanged("SelectedClient"); 
+                if (selectedClient != null)selectedClient.userType = UserType.manager; }
         }
-
-        private new void ChangedData(ClientObject client, DataType dataType, ChangeType changeType)
+        //Комманды
+        public RelayCommand AddCommand
         {
-            client.changes.Add(new ClientObject.Changes(DateTime.Now, dataType, changeType, UserType.manager));
+            get
+            {
+                return addCommand ??
+                    (addCommand = new RelayCommand(x =>
+                    {
+                        ClientObject client = new ClientObject();
+                        base.ObsClients.Add(client);
+                        SelectedClient = client;
+                    }));
+            }
         }
+        public RelayCommand RemoveCommand
+        {
+            get => removeCommand ?? (removeCommand = new RelayCommand(x =>
+                    {
+                        ClientObject client = x as ClientObject;
+                        if (client != null)
+                        {
+                            base.obsClients.Remove(client);
+                        }
+                    }, (x => obsClients.Count >= 0)));
+        }
+        #endregion
 
 
         /// <summary>
-        /// Проверка на пристутствие необхоимых данных для изменния
+        /// Репозиторий клиентов. При создании сортируется по имени
         /// </summary>
-        private void CheckForFilledFields(ClientObject client, string input)
+        public Manager()
         {
-            if (client == null)
-            {
-                MessageBox.Show("Необходимо выбрать клиента для изменения", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            if (input == String.Empty)
-            {
-                MessageBox.Show("Полe необходимо заполнить", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-            
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
     }
 }

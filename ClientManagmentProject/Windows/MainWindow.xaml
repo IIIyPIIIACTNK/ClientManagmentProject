@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClientManagmentProject"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="ClientManagmentProject.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="200">
+        Title="MainWindow" Height="200" Width="200" x:Name="StartWindow">
     <Grid Background="Lavender">
         <TextBlock HorizontalAlignment="Center" Margin="0,40,0,0" TextWrapping="Wrap" Text="Тип клиента" VerticalAlignment="Top" Width="120" TextAlignment="Center"/>
         <ComboBox Name="ClientType" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Top" Width="120" 
