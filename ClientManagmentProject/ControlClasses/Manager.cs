@@ -17,7 +17,7 @@ namespace ClientManagmentProject
         public ClientObject SelectedClient
         {
             get => selectedClient; 
-            set { selectedClient = value; OnPropertyChanged("SelectedClient"); 
+            set { selectedClient = value; OnPropertyChanged(); 
                 if (selectedClient != null)selectedClient.userType = UserType.manager; }
         }
         //Комманды

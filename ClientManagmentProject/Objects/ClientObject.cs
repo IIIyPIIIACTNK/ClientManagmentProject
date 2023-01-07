@@ -33,13 +33,13 @@ namespace ClientManagmentProject
         private string idNumber;
         private List<Changes> thisClientChanges = new List<Changes>();
         public string Name { get => name; 
-            set { name = value; OnPropertyChanged(Name); 
+            set { name = value; OnPropertyChanged(); 
                 ThisClientChanges.Add(new Changes(DateTime.Now, DataType.name, ChangeType.setClientData, userType)); } }
         public string PhoneNumber { get => phoneNumber; 
-            set { phoneNumber = value; OnPropertyChanged(PhoneNumber); 
+            set { phoneNumber = value; OnPropertyChanged(); 
                 ThisClientChanges.Add(new Changes(DateTime.Now, DataType.phoneNumber, ChangeType.setClientData, userType)); } }
         public string IdNumber { get => idNumber; set { idNumber = value; 
-                OnPropertyChanged(IdNumber); 
+                OnPropertyChanged(); 
                 ThisClientChanges.Add(new Changes(DateTime.Now, DataType.idNumber, ChangeType.setClientData, userType)); } }
         /// <summary>
         /// Список изменений клиента
