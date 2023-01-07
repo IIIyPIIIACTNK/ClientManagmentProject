@@ -16,11 +16,11 @@
 
         <ListBox Name="clientsList" Grid.Column="0" 
                  Background="#FFCDCDF7"
-                 ItemsSource="{Binding ObsClients, Mode=OneWay}" SelectedItem="{Binding SelectedClient}">
+                 ItemsSource="{Binding ObsClients}" SelectedItem="{Binding SelectedClient}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock FontSize="16" Text="{Binding Path= Name, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Center"/>
+                        <TextBlock FontSize="16" Text="{Binding Name}"  HorizontalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -50,19 +50,19 @@
                    TextAlignment="Center" Margin="0,10,0,0"/>
         <TextBox Name="clientIdNumber" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top"
                  Margin="0,31,0,0"
-                 DataContext="{Binding ElementName=clientsList,Path=SelectedItem}"
+                 DataContext="{Binding SelectedClient}"
                  Text="{Binding IdNumber, Mode=TwoWay}"/>
         
         <TextBlock Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" Text="Имя" HorizontalAlignment="Right"
                    TextAlignment="Center" Margin="0,10,36,0" />
         <TextBox Name="clientName" Grid.Column="2" Height="20" Width="100" VerticalAlignment="Top" 
                  Margin="0,31,36,0"  HorizontalAlignment="Right"
-                 DataContext="{Binding ElementName=clientsList,Path=SelectedItem}"
+                 DataContext="{Binding SelectedClient}"
                  Text="{Binding Name, Mode=TwoWay}"/>
 
 
         <ListView x:Name="clientsChangesList" Grid.Column="1" Margin="121,66,0,0" Grid.ColumnSpan="2" 
-                  Background="#FFCDCDF7" DataContext="{Binding ElementName=clientsList, Path=SelectedItem}" 
+                  Background="#FFCDCDF7" DataContext="{Binding SelectedClient}" 
                   ItemsSource="{Binding ThisClientChanges}">
             <ListView.View>
                 <GridView>

@@ -14,17 +14,7 @@ namespace ClientManagmentProject
 
         private RelayCommand saveCommand;
 
-        public ObservableCollection<ClientObject> ObsClients 
-        { 
-            get => obsClients; 
-            set 
-            {
-                obsClients = value;
-                clientsList = new List<ClientObject>(obsClients); clientsList.Sort(); 
-                obsClients = new ObservableCollection<ClientObject>(clientsList);
-                MessageBox.Show("sort");
-            } 
-        }
+        public ObservableCollection<ClientObject> ObsClients { get => obsClients; set => obsClients = value; }
 
         //Комманды
         public RelayCommand SaveCommand
